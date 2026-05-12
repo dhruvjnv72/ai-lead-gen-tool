@@ -54,12 +54,10 @@ pydantic==2.12.5
 pydantic_core==2.41.5
 pyjokes==0.8.3
 pyparsing==3.3.2
-pypiwin32==223
+
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.2
-pyttsx==1.1
-pyttsx3==2.99
-pywin32==311
+
 requests==2.33.1
 requests-oauthlib==2.0.0
 six==1.17.0
