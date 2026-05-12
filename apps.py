@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-    
+
 def get_gmail_service():
     creds = None
     if os.path.exists('token.json'):
@@ -76,4 +76,4 @@ def send():
     return render_template('results.html', results=results)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
