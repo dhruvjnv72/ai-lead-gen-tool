@@ -99,7 +99,7 @@ def send():
         )
 
         body = chat_completion.choices[0].message.content
-        subject = f"Quick idea for {lead['agency']} — worth 2 mins?"a
+        subject = f"Quick idea for {lead['agency']} - worth 2 mins?"
         send_email(service, lead['email'], subject, body)
         results.append({"name": lead['name'], "agency": lead['agency'], "status": "Sent ✅"})
 
