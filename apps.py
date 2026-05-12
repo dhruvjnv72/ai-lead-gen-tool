@@ -59,17 +59,27 @@ def send():
             messages=[
                 {
                     "role": "user",
-                    "content": f"""Write a cold email to {lead['name']} who runs {lead['agency']} in {lead['city']}.
+                    "content": f"""You are an expert cold email writer. Write a professional cold email to {lead['name']} who runs {lead['agency']} in {lead['city']}.
                     They specialize in {lead['service']}.
-                    We offer an AI tool that automatically finds new clients for agencies.
-                    Keep it under 80 words. Friendly and professional. Just the body."""
+
+                    We offer an AI-powered lead generation tool that automatically finds new clients and sends personalized emails for agencies like theirs.
+
+                    Write a cold email with these rules:
+                    - 150-200 words
+                    - Start with a specific compliment about their service or city market
+                    - Mention a specific pain point agencies face (finding consistent clients)
+                    - Explain how our tool solves it
+                    - Include one specific result or benefit (saves 10 hours/week, finds 50+ leads automatically)
+                    - End with a soft CTA asking for a 15 minute call
+                    - Friendly, conversational, not salesy
+                    - No subject line, just the body""" 
                 }
             ],
             model="llama-3.3-70b-versatile",
         )
 
         body = chat_completion.choices[0].message.content
-        subject = f"Quick question for {lead['agency']}"
+        subject = f"Quick idea for {lead['agency']} — worth 2 mins?"
         send_email(service, lead['email'], subject, body)
         results.append({"name": lead['name'], "agency": lead['agency'], "status": "Sent ✅"})
 
