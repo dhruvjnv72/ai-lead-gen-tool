@@ -44,12 +44,32 @@ def home():
 
 @app.route('/send', methods=['POST'])
 def send():
+# Validate file uploaded
+    if 'csv_file' not in request.files:
+        return "No file uploaded", 400
+    
     file = request.files['csv_file']
+    
+    if file.filename == '':
+        return "No file selected", 400
+    
+    if not file.filename.endswith('.csv'):
+        return "Please upload a CSV file only", 400
+    
     leads = []
     content = file.read().decode('utf-8').splitlines()
     reader = csv.DictReader(content)
+    
+    # Validate required columns
+    required_columns = {'name', 'agency', 'email', 'city', 'service'}
+    if not required_columns.issubset(set(reader.fieldnames or [])):
+        return f"CSV must have these columns: name, agency, email, city, service", 400
+    
     for row in reader:
         leads.append(row)
+    
+    if len(leads) == 0:
+        return "CSV file is empty", 400
 
     service = get_gmail_service()
     results = []
@@ -79,7 +99,7 @@ def send():
         )
 
         body = chat_completion.choices[0].message.content
-        subject = f"Quick idea for {lead['agency']} — worth 2 mins?"
+        subject = f"Quick idea for {lead['agency']} — worth 2 mins?"a
         send_email(service, lead['email'], subject, body)
         results.append({"name": lead['name'], "agency": lead['agency'], "status": "Sent ✅"})
 
