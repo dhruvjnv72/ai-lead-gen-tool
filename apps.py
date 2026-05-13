@@ -79,20 +79,38 @@ def send():
             messages=[
                 {
                     "role": "user",
-                    "content": f"""You are an expert cold email writer. Write a professional cold email to {lead['name']} who runs {lead['agency']} in {lead['city']}.
-                    They specialize in {lead['service']}.
+                    "content": f"""You are an expert cold email writer for a lead generation agency.
 
-                    We offer an AI-powered lead generation tool that automatically finds new clients and sends personalized emails for agencies like theirs.
+                    Choose ONE of these 3 templates and fill in the details for this lead:
+                    - Name: {lead['name']}
+                    - Agency: {lead['agency']}
+                    - City: {lead['city']}
+                    - Service: {lead['service']}
 
-                    Write a cold email with these rules:
+                    TEMPLATE 1 - Problem/Solution:
+                    Open with the biggest pain point agencies in {lead['city']} face finding clients.
+                    Introduce our AI tool as the solution.
+                    Give a specific result (50+ leads found automatically per week).
+                    End with: "Worth a 15-minute call this week?"
+
+                    TEMPLATE 2 - Compliment/Hook:
+                    Open with a genuine compliment about {lead['service']} agencies in {lead['city']}.
+                    Mention that great agencies lose time on outreach instead of doing actual work.
+                    Explain how our tool handles all outreach automatically.
+                    End with: "Can I show you how it works?"
+
+                    TEMPLATE 3 - Direct/Bold:
+                    Open with a bold statement: most agencies waste 20 hours/week on outreach.
+                    State our tool cuts that to zero.
+                    List 3 specific things it does automatically.
+                    End with: "Open to seeing a quick demo?"
+
+                    Rules:
                     - 150-200 words
-                    - Start with a specific compliment about their service or city market
-                    - Mention a specific pain point agencies face (finding consistent clients)
-                    - Explain how our tool solves it
-                    - Include one specific result or benefit (saves 10 hours/week, finds 50+ leads automatically)
-                    - End with a soft CTA asking for a 15 minute call
-                    - Friendly, conversational, not salesy
-                    - No subject line, just the body""" 
+                    - Friendly and conversational, not salesy
+                    - Use their actual name, agency and city naturally
+                    - No subject line, just the body
+                    - Pick the template that fits best for {lead['service']} agencies"""
                 }
             ],
             model="llama-3.3-70b-versatile",
